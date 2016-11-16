@@ -74,3 +74,5 @@ for email in emails:
     add_members_field.send_keys(get_base_character(c))
   add_members_field.send_keys(Keys.RETURN)
   time.sleep(random.randint(1,3))
+
+print('Import finished, you can now close the Firefox browser')
