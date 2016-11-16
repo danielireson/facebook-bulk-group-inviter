@@ -23,6 +23,16 @@ args = vars(parser.parse_args())
 if not os.path.isfile(args['file']):
   sys.exit('File does not exist: ' + args['file'])
 
+# Load emails into memory
+emails = []
+with open(args['file'], 'rb') as file:
+  csv_reader = csv.reader(file)
+  for email in csv_reader:
+    emails.append(email[0])
+
+if len(emails) < 1:
+  sys.exit('There are no emails in your supplied file')
+
 # Load the Facebook login page
 delay = 3
 browser = webdriver.Firefox(executable_path=os.getcwd() + '/geckodriver')
@@ -49,13 +59,6 @@ try:
   WebDriverWait(browser, delay).until(element_present)
 except TimeoutException:
   sys.exit('Couldn\'t navigate to the group\'s members page')
-
-# Load emails into memory
-emails = []
-with open(args['file'], 'rb') as file:
-  csv_reader = csv.reader(file)
-  for email in csv_reader:
-    emails.append(email[0])
 
 def get_base_character(c):
   desc = unicodedata.name(unicode(c))
