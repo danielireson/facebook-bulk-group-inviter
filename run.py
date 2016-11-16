@@ -1,6 +1,8 @@
+from __future__ import division
 import argparse
 import csv
 import os
+import random
 import sys
 import time
 from selenium import webdriver
@@ -10,6 +12,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
+import unicodedata
 
 parser = argparse.ArgumentParser(description='This tool lets you invite people in bulk to your Facebook group')
 parser.add_argument('-e','--email', help='Your personal Facebook account email', required=True)
@@ -54,3 +57,18 @@ with open(args['file'], 'rb') as file:
   csv_reader = csv.reader(file)
   for email in csv_reader:
     emails.append(email[0])
+
+def get_base_character(c):
+  desc = unicodedata.name(unicode(c))
+  cutoff = desc.find(' WITH ')
+  if cutoff != -1:
+      desc = desc[:cutoff]
+  return unicodedata.lookup(desc)
+
+# Loop over members from file
+add_members_field = browser.find_element_by_xpath("//input[@placeholder='Enter name or email address...']")
+for email in emails:
+  for c in email:
+    add_members_field.send_keys(get_base_character(c))
+  add_members_field.send_keys(Keys.RETURN)
+  time.sleep(random.randint(1,3))
