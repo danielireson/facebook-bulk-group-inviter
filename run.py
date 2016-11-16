@@ -2,6 +2,7 @@
 
 import argparse
 import os
+import sys
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
@@ -30,6 +31,12 @@ try:
   element_present = expected_conditions.presence_of_element_located((By.ID, 'userNavigationLabel'))
   WebDriverWait(browser, delay).until(element_present)
 except TimeoutException:
-  print 'Logging in took too long'
+  sys.exit('Unable to login, check your credentials')
 
-browser.close()
+try:
+  # Load the group's member section
+  element_present = expected_conditions.presence_of_element_located((By.ID, 'pagelet_group_members'))
+  browser.get('https://www.facebook.com/groups/mcrentrepreneurs/members')
+  WebDriverWait(browser, delay).until(element_present)
+except TimeoutException:
+  sys.exit('Couldn\'t navigate to the group\'s members page')
