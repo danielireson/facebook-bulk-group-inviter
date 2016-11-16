@@ -25,19 +25,27 @@ email_field.send_keys(args['email'])
 pass_field.send_keys(args['password'])
 pass_field.submit()
 
+# Ensure the login was successful
 try:
-  # Ensure the login was successful
   element_present = expected_conditions.presence_of_element_located((By.ID, 'userNavigationLabel'))
   WebDriverWait(browser, delay).until(element_present)
 except TimeoutException:
   sys.exit('Unable to login, check your credentials')
 
+# Load the group's member section
 try:
-  # Load the group's member section
   element_present = expected_conditions.presence_of_element_located((By.ID, 'pagelet_group_members'))
   browser.get('https://www.facebook.com/groups/' + args['group'] + '/members')
   WebDriverWait(browser, delay).until(element_present)
 except TimeoutException:
   sys.exit('Couldn\'t navigate to the group\'s members page')
 
-
+# Open the add new members dialog
+try:
+  add_members_button = browser.find_element_by_xpath("//div[@id='pagelet_group_members']//a[@role = 'button' and @rel= 'dialog']")
+  add_members_button.click()
+  add_members_field_id = 'groupMembersInput'
+  element_present = expected_conditions.presence_of_element_located((By.ID, add_members_field_id))
+  WebDriverWait(browser, delay).until(element_present)
+except TimeoutException:
+  sys.exit('Had trouble opening the add members dialog')
