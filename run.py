@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import argparse
 import os
 import sys
@@ -41,3 +39,5 @@ try:
   WebDriverWait(browser, delay).until(element_present)
 except TimeoutException:
   sys.exit('Couldn\'t navigate to the group\'s members page')
+
+
