@@ -1,5 +1,3 @@
-.DS_Store
-*.log
+.*
+*.egg-info
 emails.csv
-*.pyc
-facebook_bulk_group_inviter.egg-info
