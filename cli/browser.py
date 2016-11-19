@@ -15,8 +15,8 @@ class Browser:
   delay = 3
 
   def __init__(self):
-    driver_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + '/geckodriver'
-    self.browser = webdriver.Firefox(executable_path=driver_path)
+    driver_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + '/phantomjs'
+    self.browser = webdriver.PhantomJS(executable_path=driver_path)
 
   def navigate(self, url, wait_for, error):
     try:

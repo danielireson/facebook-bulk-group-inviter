@@ -2,7 +2,7 @@
 This is a quick tool that allows you to invite members to your Facebook group via email in bulk. I put it together for use at the Manchester Entrepreneurs society at the start of the year to import our new fresher's member list to our active Facebook group.
 
 ## How it works
-It was built in Python (2.7) and uses selenium/webdriver. The Mozilla geckodriver has been included in the repository but please ensure you have the latest version of firefox installed or it will not work.
+It was built in Python (2.7) and uses Selenium with the PhantomJS driver. The PhantomJS driver for osx has been included in the repo. If you want to run it on windows or linux you'll have to download the relevant driver and update the *executable_path* in *cli/browser.py*.
 
 ## Installing
 ``` bash
