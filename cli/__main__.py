@@ -26,7 +26,7 @@ def main():
     error='Couldn\'t navigate to the group\'s members page'
   )
   browser.import_members(emails=email_loader.all_emails)
-  print(str(len(email_loader.all_emails)) + ' email addresses successfully imported, you may now close Firefox')
+  print(str(len(email_loader.all_emails)) + ' email addresses successfully imported')
 
 if __name__ == '__main__':
   main()
