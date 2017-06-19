@@ -14,11 +14,11 @@ pip install -e .
 ```
 
 ## Getting started
-Invoke *facebook-bulk-group-inviter* from the command line with arguments *-e*, *-p* and *-g* with your facebook email, password and group name (or number) respectively. 
+Invoke *facebook-bulk-group-inviter* from the command line with arguments *-e*, and *-g* with your facebook email and group name (or number). You will then be prompted to enter your password. 
 
 ``` bash
 # run the import
-facebook-bulk-group-inviter -e email@example.com -p password -g nameornumber
+facebook-bulk-group-inviter -e email@example.com -g nameornumber
 ```
 
 By default email addresses will be loaded from *emails.csv* in the package directory but you can override this by passing a new file name with the *-f* parameter. Emails should be on a new line and in the first column. There can be other columns in the csv file but the email address has to be in the first column. Please also ensure your csv has no headers.
